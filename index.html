@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMR Dashboard | SAWTST LLC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <h1>SAWTST LLC</h1>
+                    <span class="subtitle">Program Management Review Dashboard</span>
+                </div>
+                <div class="user-section">
+                    <span class="user-name">Roshawnda Allen</span>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-tabs">
+        <div class="container">
+            <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+            <button class="tab-btn" data-tab="new-pmr">New PMR</button>
+            <button class="tab-btn" data-tab="slides">Generated Slides</button>
+        </div>
+    </nav>
+
+    <!-- Dashboard Tab -->
+    <section id="dashboard" class="tab-content active">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>Program Management Reviews</h2>
+                <div class="dashboard-controls">
+                    <select id="monthFilter">
+                        <option value="">All Months</option>
+                        <option value="2024-02">February 2024</option>
+                        <option value="2024-01">January 2024</option>
+                        <option value="2023-12">December 2023</option>
+                    </select>
+                    <button class="btn primary" onclick="switchTab('new-pmr')">
+                        <i class="fas fa-plus"></i> New PMR
+                    </button>
+                </div>
+            </div>
+
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="card-header">
+                        <h3>Active Programs</h3>
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="card-value">12</div>
+                    <div class="card-subtitle">Contracts</div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-header">
+                        <h3>PMRs Due</h3>
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="card-value warning">3</div>
+                    <div class="card-subtitle">This Month</div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-header">
+                        <h3>Completed</h3>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="card-value success">9</div>
+                    <div class="card-subtitle">February 2024</div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-header">
+                        <h3>Pending Approval</h3>
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <div class="card-value">2</div>
+                    <div class="card-subtitle">Reviews</div>
+                </div>
+            </div>
+
+            <div class="programs-table">
+                <div class="table-header">
+                    <h3>Program Status</h3>
+                    <div class="table-controls">
+                        <input type="search" placeholder="Search programs..." class="search-input">
+                        <button class="btn secondary">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Program</th>
+                            <th>PM</th>
+                            <th>Period</th>
+                            <th>Status</th>
+                            <th>Due Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="program-info">
+                                    <strong>DTESS Support</strong>
+                                    <small>Contract: FA8771-20-C-0001</small>
+                                </div>
+                            </td>
+                            <td>Sarah Johnson</td>
+                            <td>Feb 2024</td>
+                            <td><span class="status-badge approved">Approved</span></td>
+                            <td>Mar 15, 2024</td>
+                            <td>
+                                <button class="btn-icon" title="View PMR"><i class="fas fa-eye"></i></button>
+                                <button class="btn-icon" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon" title="Generate Slides"><i class="fas fa-presentation"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="program-info">
+                                    <strong>TETSS Operations</strong>
+                                    <small>Contract: FA8771-19-C-0002</small>
+                                </div>
+                            </td>
+                            <td>Mike Chen</td>
+                            <td>Feb 2024</td>
+                            <td><span class="status-badge pending">Pending Review</span></td>
+                            <td>Mar 10, 2024</td>
+                            <td>
+                                <button class="btn-icon" title="View PMR"><i class="fas fa-eye"></i></button>
+                                <button class="btn-icon" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon" title="Generate Slides"><i class="fas fa-presentation"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="program-info">
+                                    <strong>Cybersecurity Assessment</strong>
+                                    <small>Contract: FA8771-21-C-0003</small>
+                                </div>
+                            </td>
+                            <td>Jennifer Davis</td>
+                            <td>Feb 2024</td>
+                            <td><span class="status-badge draft">Draft</span></td>
+                            <td>Mar 20, 2024</td>
+                            <td>
+                                <button class="btn-icon" title="View PMR"><i class="fas fa-eye"></i></button>
+                                <button class="btn-icon" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon" title="Generate Slides"><i class="fas fa-presentation"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- New PMR Tab -->
+    <section id="new-pmr" class="tab-content">
+        <div class="container">
+            <div class="form-header">
+                <h2>Program Management Review</h2>
+                <div class="form-actions">
+                    <button class="btn secondary" onclick="saveDraft()">
+                        <i class="fas fa-save"></i> Save Draft
+                    </button>
+                    <button class="btn primary" onclick="generateSlides()">
+                        <i class="fas fa-presentation"></i> Generate Slides
+                    </button>
+                </div>
+            </div>
+
+            <form id="pmr-form" class="pmr-form">
+                <!-- Program Information Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-info-circle"></i> Program Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="contractName">Contract Name</label>
+                            <input type="text" id="contractName" name="contractName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contractNumber">Contract Number</label>
+                            <input type="text" id="contractNumber" name="contractNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pmName">Program Manager</label>
+                            <input type="text" id="pmName" name="pmName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reportingPeriod">Reporting Period</label>
+                            <input type="month" id="reportingPeriod" name="reportingPeriod" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Summary Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-dollar-sign"></i> Financial Summary</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fundedValue">Funded Value ($)</label>
+                            <input type="number" id="fundedValue" name="fundedValue" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="billedToDate">Billed to Date ($)</label>
+                            <input type="number" id="billedToDate" name="billedToDate" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="remainingFunds">Remaining Funds ($)</label>
+                            <input type="number" id="remainingFunds" name="remainingFunds" step="0.01" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="burnRate">Burn Rate ($/month)</label>
+                            <input type="number" id="burnRate" name="burnRate" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eac">EAC - Estimate at Completion ($)</label>
+                            <input type="number" id="eac" name="eac" step="0.01" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Financial Chart Preview -->
+                    <div class="chart-preview">
+                        <canvas id="financialChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Staffing Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-users"></i> Staffing</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="authorizedHeadcount">Authorized Headcount</label>
+                            <input type="number" id="authorizedHeadcount" name="authorizedHeadcount" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="currentHeadcount">Current Headcount</label>
+                            <input type="number" id="currentHeadcount" name="currentHeadcount" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="vacancies">Vacancies</label>
+                            <input type="number" id="vacancies" name="vacancies" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="pendingHires">Pending Hires</label>
+                            <input type="number" id="pendingHires" name="pendingHires" required>
+                        </div>
+                    </div>
+
+                    <!-- Staffing Table -->
+                    <div class="staffing-table">
+                        <div class="table-header">
+                            <h4>Staff Details</h4>
+                            <button type="button" class="btn secondary" onclick="addStaffMember()">
+                                <i class="fas fa-plus"></i> Add Staff
+                            </button>
+                        </div>
+                        <table class="data-table" id="staffingTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dynamic rows will be added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Performance Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-chart-line"></i> Performance</h3>
+                    
+                    <!-- Accomplishments -->
+                    <div class="form-group">
+                        <label>Key Accomplishments</label>
+                        <div class="list-input-container">
+                            <div id="accomplishments-list" class="list-items"></div>
+                            <div class="list-input">
+                                <input type="text" id="accomplishment-input" placeholder="Enter accomplishment...">
+                                <button type="button" onclick="addAccomplishment()">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Issues and Risks -->
+                    <div class="form-group">
+                        <label>Issues & Risks</label>
+                        <div class="list-input-container">
+                            <div id="risks-list" class="list-items"></div>
+                            <div class="list-input">
+                                <input type="text" id="risk-input" placeholder="Enter issue or risk...">
+                                <select id="risk-severity">
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
+                                    <option value="Critical">Critical</option>
+                                </select>
+                                <button type="button" onclick="addRisk()">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mitigations -->
+                    <div class="form-group">
+                        <label for="mitigations">Mitigations</label>
+                        <textarea id="mitigations" name="mitigations" rows="4" placeholder="Describe mitigation strategies..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Schedule Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-calendar-alt"></i> Schedule</h3>
+                    
+                    <div class="table-header">
+                        <h4>Key Milestones</h4>
+                        <button type="button" class="btn secondary" onclick="addMilestone()">
+                            <i class="fas fa-plus"></i> Add Milestone
+                        </button>
+                    </div>
+                    <table class="data-table" id="milestonesTable">
+                        <thead>
+                            <tr>
+                                <th>Milestone</th>
+                                <th>Planned Date</th>
+                                <th>Actual/Projected Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dynamic rows will be added here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Customer Satisfaction Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-smile"></i> Customer Satisfaction</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="customerRating">Rating (1-5 scale)</label>
+                            <div class="rating-input">
+                                <input type="range" id="customerRating" name="customerRating" min="1" max="5" value="3">
+                                <span class="rating-value">3</span>
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="customerNotes">Notes</label>
+                            <textarea id="customerNotes" name="customerNotes" rows="3" placeholder="Customer feedback, CPAR activity, etc."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Items Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-tasks"></i> Action Items</h3>
+                    
+                    <div class="table-header">
+                        <h4>Action Items</h4>
+                        <button type="button" class="btn secondary" onclick="addActionItem()">
+                            <i class="fas fa-plus"></i> Add Action Item
+                        </button>
+                    </div>
+                    <table class="data-table" id="actionItemsTable">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Owner</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dynamic rows will be added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Generated Slides Tab -->
+    <section id="slides" class="tab-content">
+        <div class="container">
+            <div class="slides-header">
+                <h2>Generated PMR Slides</h2>
+                <div class="slides-actions">
+                    <div class="workflow-status">
+                        <span class="status-item active">Draft</span>
+                        <span class="status-item">Submitted</span>
+                        <span class="status-item">Reviewed</span>
+                        <span class="status-item">Approved</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn secondary">
+                            <i class="fas fa-download"></i> Download PDF
+                        </button>
+                        <button class="btn primary">
+                            <i class="fas fa-paper-plane"></i> Send for Review
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide Navigation -->
+            <div class="slide-navigation">
+                <button class="slide-nav active" data-slide="1">1. Overview</button>
+                <button class="slide-nav" data-slide="2">2. Financial</button>
+                <button class="slide-nav" data-slide="3">3. Staffing</button>
+                <button class="slide-nav" data-slide="4">4. Performance</button>
+                <button class="slide-nav" data-slide="5">5. Schedule</button>
+                <button class="slide-nav" data-slide="6">6. Actions</button>
+            </div>
+
+            <!-- Slide Content -->
+            <div class="slide-container">
+                <!-- Slide 1: Program Overview -->
+                <div class="slide active" id="slide-1">
+                    <div class="slide-header">
+                        <h1 id="slide-contract-name">DTESS Support Program</h1>
+                        <h2>Program Management Review</h2>
+                    </div>
+                    <div class="slide-content">
+                        <div class="overview-grid">
+                            <div class="overview-item">
+                                <strong>Contract Number:</strong>
+                                <span id="slide-contract-number">FA8771-20-C-0001</span>
+                            </div>
+                            <div class="overview-item">
+                                <strong>Program Manager:</strong>
+                                <span id="slide-pm-name">Sarah Johnson</span>
+                            </div>
+                            <div class="overview-item">
+                                <strong>Reporting Period:</strong>
+                                <span id="slide-period">February 2024</span>
+                            </div>
+                        </div>
+                        <div class="sawtst-footer">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='40' viewBox='0 0 100 40'%3E%3Crect width='100' height='40' fill='%230a1628'/%3E%3Ctext x='50' y='25' text-anchor='middle' fill='%23c9a227' font-family='Arial' font-size='14' font-weight='bold'%3ESAWTST%3C/text%3E%3C/svg%3E" alt="SAWTST Logo">
+                            <span>SAWTST LLC | Program Management Review</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Financial Summary -->
+                <div class="slide" id="slide-2">
+                    <div class="slide-header">
+                        <h1>Financial Summary</h1>
+                        <h2 id="slide-2-period">February 2024</h2>
+                    </div>
+                    <div class="slide-content">
+                        <div class="financial-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Funded Value</span>
+                                <span class="metric-value" id="slide-funded-value">$2,500,000</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Billed to Date</span>
+                                <span class="metric-value" id="slide-billed-date">$1,750,000</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Remaining Funds</span>
+                                <span class="metric-value" id="slide-remaining">$750,000</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Burn Rate</span>
+                                <span class="metric-value" id="slide-burn-rate">$150,000/mo</span>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="slideFinancialChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional slides will be generated dynamically -->
+                <div class="slide" id="slide-3">
+                    <div class="slide-header">
+                        <h1>Staffing Status</h1>
+                        <h2 id="slide-3-period">February 2024</h2>
+                    </div>
+                    <div class="slide-content" id="staffing-slide-content">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+
+                <div class="slide" id="slide-4">
+                    <div class="slide-header">
+                        <h1>Performance Highlights & Risks</h1>
+                        <h2 id="slide-4-period">February 2024</h2>
+                    </div>
+                    <div class="slide-content" id="performance-slide-content">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+
+                <div class="slide" id="slide-5">
+                    <div class="slide-header">
+                        <h1>Schedule Status</h1>
+                        <h2 id="slide-5-period">February 2024</h2>
+                    </div>
+                    <div class="slide-content" id="schedule-slide-content">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+
+                <div class="slide" id="slide-6">
+                    <div class="slide-header">
+                        <h1>Action Items</h1>
+                        <h2 id="slide-6-period">February 2024</h2>
+                    </div>
+                    <div class="slide-content" id="actions-slide-content">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integration Status Modal -->
+    <div id="integrationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3><i class="fas fa-plug"></i> Costpoint Integration</h3>
+            <p>This dashboard is ready for Costpoint integration. Financial data and contract information will be automatically pulled from your Costpoint system.</p>
+            <div class="integration-status">
+                <div class="status-item">
+                    <i class="fas fa-check-circle success"></i>
+                    <span>Dashboard Interface Ready</span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-clock warning"></i>
+                    <span>API Connection Pending</span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-database muted"></i>
+                    <span>Data Sync Configuration</span>
+                </div>
+            </div>
+            <button class="btn primary">Configure Integration</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
